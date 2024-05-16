@@ -17,7 +17,7 @@ Quickly find the link you need with our robust search functionality, saving you 
 
 ## Ready to Get Started?
 
-Sign up now to start organizing your links more efficiently! Click [here](https://linksync.free.nf) to get started.
+Sign up now to start organizing your links more efficiently! Click [here](https://student408.github.io/LinkSync) to get started.
 
 ---
 *Created by [Ranjan Shettigar]*
