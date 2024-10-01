@@ -10,10 +10,7 @@ $dbname = "link_manager";
 // define('GMAIL_SENDER_EMAIL', 'yur@gmail.com');
 
 
-define('GMAIL_FROM_NAME', 'LinkSync');
-define('GMAIL_USERNAME', 'noreply@theloko.me');
-define('GMAIL_PASSWORD', 'theloko@noreply');
-define('GMAIL_SENDER_EMAIL', 'noreply@theloko.me');
+
 
 
 // // Zoho SMTP settings
