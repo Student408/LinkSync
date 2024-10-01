@@ -5,10 +5,15 @@ $password = "";
 $dbname = "link_manager";
 
 // Gmail credentials
+// define('GMAIL_USERNAME', 'yur@gmail.com');
+// define('GMAIL_PASSWORD', 'scbv xxmq tuai xaos');
+// define('GMAIL_SENDER_EMAIL', 'yur@gmail.com');
+
+
 define('GMAIL_FROM_NAME', 'LinkSync');
-define('GMAIL_USERNAME', 'noreply@linksync.com');
-define('GMAIL_PASSWORD', 'noreply@linksync.com');
-define('GMAIL_SENDER_EMAIL', 'yourpassword');
+define('GMAIL_USERNAME', 'noreply@theloko.me');
+define('GMAIL_PASSWORD', 'theloko@noreply');
+define('GMAIL_SENDER_EMAIL', 'noreply@theloko.me');
 
 
 // // Zoho SMTP settings

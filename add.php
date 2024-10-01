@@ -178,7 +178,7 @@ if ($user_result->num_rows > 0) {
             var tagSuggestions = $('#tagSuggestions');
 
             tagInput.on('input', function() {
-                var query = $(this).val();
+                var query = $(this).val().split(',').pop().trim();
                 var url = $('#url').val();
                 if (query.length > 0) {
                     $.ajax({
@@ -200,11 +200,16 @@ if ($user_result->num_rows > 0) {
 
             tagSuggestions.on('click', 'div', function() {
                 var selectedTag = $(this).text();
-                var currentTags = tagInput.val();
-                var tags = currentTags ? currentTags.split(',') : [];
-                tags.push(selectedTag);
-                tagInput.val(tags.join(','));
+                var currentTags = tagInput.val().split(',').map(tag => tag.trim());
+                currentTags.pop(); // Remove the last (partial) tag
+                currentTags.push(selectedTag); // Add the selected tag
+                
+                tagInput.val(currentTags.join(', '));
                 tagSuggestions.hide();
+                
+                // Set cursor at the end of the input
+                tagInput[0].setSelectionRange(tagInput.val().length, tagInput.val().length);
+                tagInput.focus();
             });
 
             $(document).on('click', function(e) {
