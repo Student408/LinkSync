@@ -5,48 +5,46 @@ include 'includes/config.php';
 // Check if the user is logged in
 session_start();
 if (!isset($_SESSION['username'])) {
-    // Redirect to the login page if the user is not logged in
     header("Location: auth/login.php");
     exit();
 }
 
 // Logout logic
 if (isset($_POST['logout'])) {
-    // Destroy the session
     session_destroy();
-    // Redirect to the login page
     header("Location: auth/login.php");
     exit();
 }
 
-// Retrieve the username from the session
+// Retrieve user info securely
 $username = $_SESSION['username'];
-
-// Fetch the email associated with the username from the users table
-$sql_select_user = "SELECT email FROM users WHERE username='$username'";
-$user_result = $conn->query($sql_select_user);
+$stmt = $conn->prepare("SELECT email FROM users WHERE username=?");
+$stmt->bind_param("s", $username);
+$stmt->execute();
+$user_result = $stmt->get_result();
 
 if ($user_result->num_rows > 0) {
     $user_row = $user_result->fetch_assoc();
     $email = $user_row['email'];
 } else {
-    // Redirect to login page if the username is not found
     header("Location: auth/login.php");
     exit();
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
+    <meta charset="UTF-8">
     <title>Add New Link</title>
     <link rel="icon" href="icons/linksync.svg" type="image/svg+xml">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=San+Francisco">
     <link rel="stylesheet" type="text/css" href="css/add.css">
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" async></script>
     <style>
+        /* Optimized styling */
         #tagSuggestions {
             position: absolute;
             border: 1px solid #ccc;
@@ -108,8 +106,8 @@ if ($user_result->num_rows > 0) {
                         <option value="private">Private</option>
                     </select>
                 </div>
-                <input type="hidden" name="username" value="<?php echo $username; ?>">
-                <input type="hidden" name="email" value="<?php echo $email; ?>">
+                <input type="hidden" name="username" value="<?php echo htmlspecialchars($username); ?>">
+                <input type="hidden" name="email" value="<?php echo htmlspecialchars($email); ?>">
                 <button type="submit" id="submitBtn">Add Link</button>
             </form>
         </div>
@@ -117,6 +115,9 @@ if ($user_result->num_rows > 0) {
 
     <script>
         $(document).ready(function() {
+            var $tagInput = $('#tags');
+            var $tagSuggestions = $('#tagSuggestions');
+
             $('#addForm').submit(function(event) {
                 event.preventDefault();
 
@@ -125,14 +126,11 @@ if ($user_result->num_rows > 0) {
                     url: 'add_process.php',
                     data: $(this).serialize(),
                     success: function(response) {
-                        console.log('Response:', response);
                         if (response.trim() === 'duplicate') {
                             alert('Link with the same name or URL already exists.');
                         } else if (response.trim() === 'success') {
-                            var addedUsername = '<?php echo urlencode($username); ?>';
-                            console.log('Added username:', addedUsername);
-                            if (confirm('Link added successfully with username: ' + addedUsername + '. Click OK to continue.')) {
-                                window.location.href = 'add.php?added=' + addedUsername;
+                            if (confirm('Link added successfully. Click OK to continue.')) {
+                                window.location.href = 'add.php?added=' + encodeURIComponent('<?php echo $username; ?>');
                             }
                         } else {
                             alert('Error occurred while adding the link.');
@@ -144,9 +142,7 @@ if ($user_result->num_rows > 0) {
                 });
             });
 
-            $('#autocompleteBtn').click(function() {
-                autoComplete();
-            });
+            $('#autocompleteBtn').click(autoComplete);
 
             function autoComplete() {
                 var url = $('#url').val();
@@ -154,9 +150,7 @@ if ($user_result->num_rows > 0) {
                     $.ajax({
                         type: 'POST',
                         url: 'auto.php',
-                        data: {
-                            url: url
-                        },
+                        data: { url: url },
                         dataType: 'json',
                         success: function(data) {
                             $('#name').val(data.name);
@@ -168,53 +162,42 @@ if ($user_result->num_rows > 0) {
                         }
                     });
                 } else {
-                    $('#name').val('');
-                    $('#description').val('');
-                    $('#tags').val('');
+                    $('#name, #description, #tags').val('');
                 }
             }
 
-            var tagInput = $('#tags');
-            var tagSuggestions = $('#tagSuggestions');
-
-            tagInput.on('input', function() {
+            $tagInput.on('input', function() {
                 var query = $(this).val().split(',').pop().trim();
-                var url = $('#url').val();
                 if (query.length > 0) {
                     $.ajax({
                         url: 'get_tag_suggestions.php',
                         method: 'POST',
-                        data: { query: query, url: url },
+                        data: { query: query, url: $('#url').val() },
                         success: function(data) {
-                            tagSuggestions.empty();
+                            $tagSuggestions.empty().show();
                             data.forEach(function(tag) {
-                                tagSuggestions.append('<div>' + tag + '</div>');
+                                $tagSuggestions.append('<div>' + tag + '</div>');
                             });
-                            tagSuggestions.show();
                         }
                     });
                 } else {
-                    tagSuggestions.hide();
+                    $tagSuggestions.hide();
                 }
             });
 
-            tagSuggestions.on('click', 'div', function() {
+            $tagSuggestions.on('click', 'div', function() {
                 var selectedTag = $(this).text();
-                var currentTags = tagInput.val().split(',').map(tag => tag.trim());
-                currentTags.pop(); // Remove the last (partial) tag
-                currentTags.push(selectedTag); // Add the selected tag
-                
-                tagInput.val(currentTags.join(', '));
-                tagSuggestions.hide();
-                
-                // Set cursor at the end of the input
-                tagInput[0].setSelectionRange(tagInput.val().length, tagInput.val().length);
-                tagInput.focus();
+                var currentTags = $tagInput.val().split(',').map(tag => tag.trim());
+                currentTags.pop();
+                currentTags.push(selectedTag);
+                $tagInput.val(currentTags.join(', '));
+                $tagSuggestions.hide();
+                $tagInput.focus().setSelectionRange($tagInput.val().length, $tagInput.val().length);
             });
 
             $(document).on('click', function(e) {
                 if (!$(e.target).closest('#tags, #tagSuggestions').length) {
-                    tagSuggestions.hide();
+                    $tagSuggestions.hide();
                 }
             });
         });
