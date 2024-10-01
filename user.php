@@ -54,6 +54,8 @@ if (isset($_POST['logout'])) {
                                     if (deleteXhr.readyState === 4 && deleteXhr.status === 200) {
                                         // Handle response from the server
                                         alert(deleteXhr.responseText);
+                                        // Reload the page to reflect the changes
+                                        location.reload();
                                     }
                                 };
                                 deleteXhr.send("id=" + linkId + "&password=" + password);
@@ -81,18 +83,21 @@ if (isset($_POST['logout'])) {
 
         <div class="link-list">
             <?php
-            $sql = "SELECT * FROM links WHERE (visibility = 'public' OR username = '$currentUser')";
-            $result = $conn->query($sql);
+            $sql = "SELECT * FROM links WHERE (visibility = 'public' OR username = ?) ORDER BY clicks DESC";
+            $stmt = $conn->prepare($sql);
+            $stmt->bind_param("s", $currentUser);
+            $stmt->execute();
+            $result = $stmt->get_result();
 
             if ($result->num_rows > 0) {
                 while ($row = $result->fetch_assoc()) {
                     echo "<div class='link'>";
-                    echo "<a href='" . $row['url'] . "' target='_blank'>" . $row['name'] . "</a>";
+                    echo "<a href='track_click.php?id=" . $row['id'] . "' target='_blank'>" . $row['name'] . "</a>";
                     echo "<p>" . $row['description'] . "</p>";
-                    // Display tags if they exist
                     if (!empty($row['tags'])) {
                         echo "<p class='tags'>Tags: " . $row['tags'] . "</p>";
                     }
+                    // echo "<p class='clicks'>Clicks: " . $row['clicks'] . "</p>";
                     echo "<div class='link-actions'>";
                     echo "<a href='edit.php?id=" . $row['id'] . "' class='edit-btn'>Edit</a>";
                     echo "<a href='#' onclick='confirmDelete(" . $row['id'] . ")' class='delete-btn'>Delete</a>";

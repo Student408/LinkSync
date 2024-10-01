@@ -38,6 +38,9 @@ CREATE TABLE links (
     visibility ENUM('public', 'private') NOT NULL DEFAULT 'public'
 );
 
+ALTER TABLE links
+ADD COLUMN clicks INT DEFAULT 0;
+
 
 ALTER TABLE links ADD COLUMN og_image_url VARCHAR(255);
 
