@@ -1,6 +1,6 @@
 # LinkSync - Effortlessly Organize Your Links
 
-<img src="LinkSync/icons/linksync.svg" alt="LinkSync Logo" width="100" height="100">
+<img src="icons/linksync.svg" alt="LinkSync Logo" width="100" height="100">
 
 LinkSync is your personal digital assistant, designed to help you effortlessly manage your links with ease. With intuitive organization features and a powerful search functionality, LinkSync transforms the way you organize your online resources. 
 
