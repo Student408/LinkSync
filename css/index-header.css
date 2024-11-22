@@ -128,7 +128,7 @@ header {
 }
 
 .logout-btn {
-    background-color: #ff3b30;
+    background-color: #2196F3;
     color: #fff;
     border: none;
     padding: 0.25rem 0.5rem;
@@ -138,7 +138,7 @@ header {
 }
 
 .logout-btn:hover {
-    background-color: #e52923;
+    background-color: #1c7dcd;
 }
 
 .theme-switch {
@@ -257,7 +257,7 @@ input:checked + .slider:before {
 
 /* Logout Button Styles */
 .logout-btn {
-    background-color: #ff3b30;
+    background-color: #2196F3;
     color: #fff;
     border: none;
     padding: 0.25rem 0.5rem;
@@ -267,5 +267,5 @@ input:checked + .slider:before {
 }
 
 .logout-btn:hover {
-    background-color: #e52923;
+    background-color: #2682cd;
 }

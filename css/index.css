@@ -7,7 +7,7 @@
 
 body {
     font-family: 'San Francisco', sans-serif;
-    background-color: #f5f5f5;
+    background-color: #ebebeb;
     color: #333;
 }
 
@@ -26,11 +26,10 @@ body {
 #searchInput {
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    border: 1px solid #ccc;
     border-radius: 5px 0 0 5px;
     font-size: 16px;
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    
 }
 
 #searchButton {
@@ -45,6 +44,25 @@ body {
 #searchButton img {
     width: 20px;
     height: 20px;
+}
+
+
+/* Style for the sort select */
+#sortSelect {
+    font-family: 'San Francisco', sans-serif;
+    font-size: 10px;
+    color: #333;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 2px 4px;
+    margin-left: 3px;
+    outline: none;
+}
+
+#sortSelect:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
 }
 
 /* Link List */
@@ -75,16 +93,17 @@ body {
     }
 }
 .link-list {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-    padding: 24px;
-    max-width: 1400px;
+    /* max-width: 800px; */
     margin: 0 auto;
+    padding: 20px;
 }
+
+
+
 .link {
-    background-color: rgba(255, 255, 255, 0.05);
-    border: 1px solid rgba(255, 255, 255, 0.1);
+    background-color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.215);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     border-radius: 12px;
     padding: 24px;
     transition: all 0.3s ease;
@@ -94,33 +113,30 @@ body {
     position: relative;
     overflow: hidden;
 }
+.link a {
+    color: #007aff;
+    text-decoration: none;
+    font-size: 18px;
+    font-weight: bold;
+}
 
 .link:hover {
     transform: translateY(-2px);
     background-color: rgba(255, 255, 255, 0.08);
     box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
 }
-
-.link a {
-    color: #fff;
-    text-decoration: none;
-    font-size: 20px;
-    font-weight: 600;
-    margin-bottom: 8px;
-}
-
-.link p {
-    color: rgba(255, 255, 255, 0.6);
-    font-size: 14px;
-    line-height: 1.5;
-    margin: 0;
-}
-
 .link .tags {
-    color: rgba(255, 255, 255, 0.4);
     font-size: 12px;
     margin-top: auto;
 }
+
+.link p {
+    margin-top: 5px;
+    color: #666;
+    word-break: break-word; /* Added */
+    overflow-wrap: break-word; /* Added */
+}
+
 .link-actions {
     display: flex;
     justify-content: flex-end;
@@ -128,28 +144,20 @@ body {
     align-self: flex-end; /* Added */
 }
 
-.link-actions {
-    display: flex;
-    gap: 12px;
-    margin-top: 16px;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding-top: 16px;
-}
-
 .link-actions a {
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.6);
+    background-color: transparent;
+    border: none;
+    color: #007aff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
     text-decoration: none;
-    padding: 6px 12px;
-    border-radius: 6px;
-    transition: all 0.2s ease;
-    background-color: rgba(255, 255, 255, 0.05);
-    margin: 0;
+    margin-left: 10px;
 }
 
 .link-actions a:hover {
-    background-color: rgba(255, 255, 255, 0.1);
-    color: #fff;
+    background-color: #eee;
 }
 
 .no-links {
@@ -158,13 +166,6 @@ body {
 }
 
 
-.link-actions .delete-btn {
-    color: #ff3b30;
-}
-
-.link-actions .delete-btn:hover {
-    background-color: rgba(255, 59, 48, 0.1);
-}
 /* Theme switch styles */
 .theme-switch {
     display: flex;

@@ -35,6 +35,7 @@ if (isset($_SESSION['username'])) {
             <h1 class="animate">Effortlessly Organize Your Links</h1>
             <p class="animate">LinkSync is your personal digital assistant, helping you manage your links with ease.</p>
             <button onclick="redirectToSignup()" class="animate">Get Started</button>
+            <button onclick="redirectToguest()" class="animate">Guest</button>
         </div>
     </section>
 
@@ -72,6 +73,7 @@ if (isset($_SESSION['username'])) {
         <h2 class="animate">Ready to Get Started?</h2>
         <p class="animate">Sign up now to start organizing your links more efficiently!</p>
         <button onclick="redirectToSignup()" class="animate">Sign Up</button>
+        <button onclick="redirectToguest()" class="animate">Guest</button>
     </section>
 
     <?php include 'footer.php'; ?>
@@ -81,6 +83,9 @@ if (isset($_SESSION['username'])) {
 
         function redirectToSignup() {
             window.location.href = "auth/signup.php";
+        }
+        function redirectToguest() {
+            window.location.href = "guest.php";
         }
 
         gsap.utils.toArray(".animate").forEach(function(elem) {
