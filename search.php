@@ -45,7 +45,7 @@ if (!isset($_SESSION['username'])) {
     <header>
         <nav>
         <div class="logo">
-                <a href="user.php">LinkSync</a>
+                <a href="index.php">LinkSync</a>
                 <a href="search.php">Search Plus</a>
             </div>
         </nav>

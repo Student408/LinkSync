@@ -14,8 +14,8 @@ if ($result->num_rows > 0) {
         // Delete the link from the temporary table
         $sql_delete = "DELETE FROM deleted_links WHERE id='{$row['id']}'";
         if ($conn->query($sql_delete) === TRUE) {
-            // Redirect to user.php after successful undo
-            header("Location: user.php");
+            // Redirect to index.php after successful undo
+            header("Location: index.php");
             exit(); // Terminate script execution
         } else {
             // Display an error message if deletion from temporary table fails
@@ -26,8 +26,8 @@ if ($result->num_rows > 0) {
         echo "Error moving link back to links: " . $conn->error;
     }
 } else {
-    // Redirect to user.php if no link is found in the temporary table
-    header("Location: user.php");
+    // Redirect to index.php if no link is found in the temporary table
+    header("Location: index.php");
     exit(); // Terminate script execution
 }
 

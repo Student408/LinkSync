@@ -9,7 +9,7 @@ $tags = $_POST['tags'];
 
 $sql = "UPDATE links SET url='$url', name='$name', description='$description', tags='$tags' WHERE id=$id";
 if ($conn->query($sql) === TRUE) {
-    header("Location: user.php");
+    header("Location: index.php");
 } else {
     echo "Error updating link: " . $conn->error;
 }

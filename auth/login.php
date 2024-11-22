@@ -4,7 +4,7 @@ session_start();
 
 // If the user is already logged in, redirect to the dashboard
 if (isset($_SESSION['username'])) {
-    header("Location: ../user.php");
+    header("Location: ../index.php");
     exit();
 }
 
@@ -29,7 +29,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($password, $row['password'])) {
             // Password is correct, create session and redirect to dashboard
             $_SESSION['username'] = $row['username'];
-            header("Location: ../user.php");
+            header("Location: ../index.php");
             exit();
         } else {
             // Password is incorrect

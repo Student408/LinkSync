@@ -10,7 +10,7 @@
     <header>
         <div class="logo">
             <img src="icons/logo.svg" alt="LinkSync">
-            <a href="user.php"> LinkSync</a>
+            <a href="index.php"> LinkSync</a>
         </div>
         <p class="subtitle">A simple and intuitive tool to organize your links</p>
         <?php

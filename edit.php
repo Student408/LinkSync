@@ -29,17 +29,17 @@ if (isset($_GET['id'])) {
         // Check if the current user owns the link
         if ($row['username'] !== $currentUser) {
             // Show a popup indicating that the user cannot edit the link
-            echo "<script>alert('You are not authorized to edit this link.'); window.location.href = 'user.php';</script>";
+            echo "<script>alert('You are not authorized to edit this link.'); window.location.href = 'index.php';</script>";
             exit(); // Terminate script execution
         }
     } else {
-        // Redirect to user.php if no link with the specified 'id' is found
-        header("Location: user.php");
+        // Redirect to index.php if no link with the specified 'id' is found
+        header("Location: index.php");
         exit(); // Terminate script execution
     }
 } else {
-    // Redirect to user.php if 'id' parameter is not set in the URL
-    header("Location: user.php");
+    // Redirect to index.php if 'id' parameter is not set in the URL
+    header("Location: index.php");
     exit(); // Terminate script execution
 }
 ?>
@@ -58,10 +58,10 @@ if (isset($_GET['id'])) {
     <header>
         <nav>
             <div class="logo">
-                <a href="user.php">LinkSync</a>
+                <a href="index.php">LinkSync</a>
             </div>
             <ul>
-                <li><a href="user.php">Links</a></li>
+                <li><a href="index.php">Links</a></li>
                 <li><a href="add.php">Add</a></li>
             </ul>
         </nav>

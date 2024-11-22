@@ -1,7 +1,7 @@
 <?php
 // Set session cookie expiration time to 5 minutes from now
-$expiration = time() + (5 * 60); // 5 minutes
-session_set_cookie_params($expiration);
+// $expiration = time() + (5 * 60); // 5 minutes
+// session_set_cookie_params($expiration);
 
 // Start the session
 session_start();

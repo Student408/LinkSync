@@ -6,7 +6,7 @@ include 'includes/config.php';
 session_start();
 if (isset($_SESSION['username'])) {
     // Redirect to the login page if the user is logged in
-    header("Location: user.php");
+    header("Location: index.php");
     exit();
 }
 ?>

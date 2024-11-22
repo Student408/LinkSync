@@ -36,6 +36,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->close();
 } else {
     // Redirect to the index page if the request is not a POST request
-    header("Location: user.php");
+    header("Location: index.php");
     exit();
 }
