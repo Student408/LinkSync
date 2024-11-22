@@ -12,6 +12,7 @@ body {
 }
 
 
+
 /* Search Container */
 .search-container {
     display: flex;
@@ -77,8 +78,6 @@ body {
     margin: 0 auto;
     padding: 20px;
 }
-
-
 
 .link {
     background-color: #fff;

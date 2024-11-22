@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LinkSync</title>
     <link rel="stylesheet" href="css/footer.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 
 <body>
@@ -18,10 +19,11 @@
         </div>
         <br>
         <div class="social-icons">
-            <a> <img src="icons/email.svg" alt="Email Icon"onclick="window.location.href='mailto:youremail@gmail.com'"> </a>
-            <a href="#"><img src="icons/facebook.svg" alt="Facebook"></a>
-            <a href="#"><img src="icons/twitter.svg" alt="Twitter"></a>
-            <a href="#"><img src="icons/instagram.svg" alt="Instagram"></a>
+            <a href="https://github.com/Student408" target="_blank" rel="noopener noreferrer" class="fab fa-github"></a>
+            <a href="mailto: lokobiz99@gmail.com" class="fas fa-envelope" target="_blank"></a>
+            <a href="https://www.linkedin.com/in/ranjanshettigar/" class="fab fa-linkedin" target="_blank"></a>
+            <a href="https://x.com/lokotwiststudio" target="_blank" rel="noopener noreferrer" class="fab fa-twitter"></a>
+
             <!-- <p>Made with Claude.ai & ChatGPT</p> -->
             <!-- <a  href="https://chat.openai.com" target="_blank"><img src="icons/chatgpt.svg" alt="ChatGPT"></a>
             <a href="https://www.anthropic.com" target="_blank"><img src="icons/claude.svg" alt="Claude AI"></a> -->

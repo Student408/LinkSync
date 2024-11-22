@@ -29,13 +29,22 @@ footer {
     color: #000000;
 }
 
-.social-icons a {
-    display: inline-block;
-    margin: 0 10px;
+.social-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px;
 }
-
-.social-icons img {
-    width: 25px;
+.social-icons a {
+  color: #808080;
+  text-decoration: none;
+  font-size: 24px;
+  margin: 0 16px;
+  transition: color 0.3s, text-shadow 0.3s;
+}
+.social-icons a:hover {
+  color: #ffffff;
+  text-shadow: 0 0 10px #ffffffcc;
 }
 
 .copyright {

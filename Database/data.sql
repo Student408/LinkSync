@@ -25,29 +25,6 @@ ALTER TABLE links
 ADD COLUMN visibility ENUM('public', 'private') NOT NULL DEFAULT 'public';
 
 
-
-CREATE TABLE links (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    url VARCHAR(255) NOT NULL,
-    name VARCHAR(255) NOT NULL,
-    description TEXT,
-    tags VARCHAR(255),
-    username VARCHAR(255),
-    email VARCHAR(255),
-    added_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    visibility ENUM('public', 'private') NOT NULL DEFAULT 'public'
-);
-
-ALTER TABLE links
-ADD COLUMN clicks INT DEFAULT 0;
-
-
-ALTER TABLE links ADD COLUMN og_image_url VARCHAR(255);
-
-
-
-
-
 -- Create table for temporarily storing deleted links
 CREATE TABLE deleted_links (
     id INT AUTO_INCREMENT PRIMARY KEY,
@@ -74,16 +51,7 @@ CREATE TABLE users (
 );
 
 ALTER TABLE users ADD reset_token VARCHAR(64) DEFAULT NULL;
-ALTER TABLE users ADD COLUMN reset_requests_count INT DEFAULT 0;
 
-
-CREATE TABLE password_reset_requests (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    email VARCHAR(255) NOT NULL,
-    request_time TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-);
-
-ALTER TABLE password_reset_requests ADD  ip_address VARCHAR(45) NOT NULL;
 
 -- -- Insert sample data
 -- INSERT INTO links (url, name, description, tags) VALUES 

@@ -17,8 +17,7 @@ function smtp_mailer($email, $subject, $msg)
     $mail->IsSMTP();
     $mail->SMTPAuth = true;
     $mail->SMTPSecure = 'tls';
-    // $mail->Host = "smtp.gmail.com";
-    $mail->Host = "smtp.zoho.in";
+    $mail->Host = MAIL_SENDER_HOST;
     $mail->Port = 587;
     $mail->IsHTML(true);
     $mail->CharSet = 'UTF-8';
@@ -28,7 +27,6 @@ function smtp_mailer($email, $subject, $msg)
     $mail->Password = GMAIL_PASSWORD;
     $mail->SetFrom(GMAIL_SENDER_EMAIL, "LinkSync");
 
-    
     $mail->Subject = $subject;
     $mail->Body = $msg;
     $mail->AddAddress($email);

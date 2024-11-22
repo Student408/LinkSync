@@ -10,16 +10,8 @@ if (!isset($_SESSION['username'])) {
     exit();
 }
 
-// Function to highlight search terms
-function highlightSearchTerms($text, $keywords)
-{
-    foreach ($keywords as $keyword) {
-        $text = preg_replace("/\b($keyword)\b/i", "<span class='highlight'>$1</span>", $text);
-    }
-    return $text;
-}
-?>
 
+?>
 <!DOCTYPE html>
 <html>
 
@@ -52,23 +44,30 @@ function highlightSearchTerms($text, $keywords)
 <body>
     <header>
         <nav>
-            <div class="logo">
+        <div class="logo">
                 <a href="user.php">LinkSync</a>
                 <a href="search.php">Search Plus</a>
             </div>
         </nav>
 
-        <div class="search-container">
-            <form action="" method="GET">
-                <input type="text" name="query" id="search_query" placeholder="Search...">
+    <div class="search-container">
+        <form action="" method="GET">
+            <input type="text" name="query" id="search_query" placeholder="Search..." id="searchInput">
 
-                <button type="submit" id="searchButton">
-                    <img src="icons/search.svg" alt="Search">
-                </button>
-                <div id="autocomplete"></div>
-            </form>
-        </div>
-    </header>
+            <button type="submit" id="searchButton">
+                <img src="icons/search.svg" alt="Search">
+            </button>
+            <div id="autocomplete"></div>
+        </form>    
+    </div>
+    <!-- <div class="sorting">
+        <h3>Sort by:</h3>
+        <ul>
+            <li><a href="?query=<?php echo urlencode($query); ?>&sort=relevance">Relevance</a></li>
+            <li><a href="?query=<?php echo urlencode($query); ?>&sort=name">Name</a></li>
+            <li><a href="?query=<?php echo urlencode($query); ?>&sort=date">Date</a></li>
+        </ul>
+    </div> -->
     
     <?php
     // Initialize $conditions as an empty array
@@ -86,12 +85,11 @@ function highlightSearchTerms($text, $keywords)
         $keywords = explode(' ', $query);
 
         // Construct the SQL query with advanced search conditions
-        $sql = "SELECT * FROM links WHERE (";
+        $sql = "SELECT * FROM links WHERE ";
         foreach ($keywords as $keyword) {
             $conditions[] = "name LIKE '%$keyword%' OR description LIKE '%$keyword%' OR tags LIKE '%$keyword%'";
         }
         $sql .= implode(' OR ', $conditions);
-        $sql .= ") AND (username = '" . $conn->real_escape_string($_SESSION['username']) . "' OR visibility = 'public')";
 
         // Sorting
         $sort = isset($_GET['sort']) ? $_GET['sort'] : 'relevance';
@@ -100,7 +98,7 @@ function highlightSearchTerms($text, $keywords)
                 $sql .= " ORDER BY name";
                 break;
             case 'date':
-                $sql .= " ORDER BY added_date DESC";
+                $sql .= " ORDER BY created_at DESC";
                 break;
             default:
                 // Default to relevance sorting based on search term occurrence
@@ -136,15 +134,24 @@ function highlightSearchTerms($text, $keywords)
         echo "Please enter a search query.";
     }
 
+    // Function to highlight search terms
+    function highlightSearchTerms($text, $keywords)
+    {
+        foreach ($keywords as $keyword) {
+            $text = preg_replace("/\b($keyword)\b/i", "<span class='highlight'>$1</span>", $text);
+        }
+        return $text;
+    }
+
     // Initialize $results_per_page with a non-zero value
     $results_per_page = 10;
 
     // Display pagination links
-    $sqlCount = "SELECT COUNT(*) AS total FROM links WHERE (username = '" . $conn->real_escape_string($_SESSION['username']) . "' OR visibility = 'public')";
+    $sqlCount = "SELECT COUNT(*) AS total FROM links";
 
     // Add conditions if search query is provided
     if (!empty($conditions)) {
-        $sqlCount .= " AND (" . implode(' OR ', $conditions) . ")";
+        $sqlCount .= " WHERE " . implode(' OR ', $conditions);
     }
 
     $resultCount = $conn->query($sqlCount);
@@ -163,6 +170,7 @@ function highlightSearchTerms($text, $keywords)
         echo "Error counting total results: " . $conn->error;
     }
     ?>
+    
 </body>
 
 </html>

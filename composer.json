@@ -2,7 +2,6 @@
     "require": {
         "phpmailer/phpmailer": "^6.9",
         "google/apiclient": "^2.15",
-        "mailjet/mailjet-apiv3-php": "^1.6",
-        "swiftmailer/swiftmailer": "^6.3"
+        "mailjet/mailjet-apiv3-php": "^1.6"
     }
 }

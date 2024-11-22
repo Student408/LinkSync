@@ -4,7 +4,7 @@
   <ul style="list-style-type: none; padding: 0; margin: 0;">
     <li style="margin-bottom: 10px;">
       <img src="https://icons.iconarchive.com/icons/iconsmind/outline/24/Mail-icon.png" style="vertical-align: middle; margin-right: 5px;">
-      <a href="mailto:lokotwiststudio@gmail.com" style="color: #007AFF; text-decoration: none;">lokotwiststudio@gmail.com</a>
+      <a href="mailto:lokobiz99@gmail.com" style="color: #007AFF; text-decoration: none;">lokobiz99@gmail.com</a>
     </li>
     <!-- <li style="margin-bottom: 10px;">
       <img src="https://icons.iconarchive.com/icons/iconsmind/outline/24/Phone-2-icon.png" style="vertical-align: middle; margin-right: 5px;">

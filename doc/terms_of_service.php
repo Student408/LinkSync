@@ -98,7 +98,7 @@ a:hover {
 
 <h2>Contact Us</h2>
 
-<p>If you have any questions about our Terms of Service, please contact us at <a href="mailto:lokotwiststudio@gmail.com">lokotwiststudio@gmail.com</a>.</p>
+<p>If you have any questions about our Terms of Service, please contact us at <a href="mailto:lokobiz99@gmail.com">lokobiz99@gmail.com</a>.</p>
 
 <p><strong>Effective Date:</strong> April 19, 2024</p>
 
